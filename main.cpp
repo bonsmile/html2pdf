@@ -44,7 +44,7 @@ int WINAPI wWinMain(
 	if (nArgs == 2) {
 		dest = argList[1];
 	} else {
-		int pointPos = src.find_last_of(L'.');
+		size_t pointPos = src.find_last_of(L'.');
 		if (pointPos == std::wstring::npos) {
 			dest = src + L".pdf";
 		} else {
