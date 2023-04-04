@@ -26,23 +26,23 @@ static bool FileExists(const wchar_t* fileName) noexcept {
 int WINAPI wWinMain(
 	_In_ HINSTANCE /*hInstance*/,
 	_In_opt_ HINSTANCE /*hPrevInstance*/,
-	_In_ LPWSTR lpCmdLine,
+	_In_ LPWSTR /*lpCmdLine*/,
 	_In_ int /*nCmdShow*/
 ) {
 	int nArgs;
-	wchar_t** argList = CommandLineToArgvW(lpCmdLine, &nArgs);
-	if (!argList || nArgs < 1 || nArgs > 2) {
+	wchar_t** argList = CommandLineToArgvW(GetCommandLine(), &nArgs);
+	if (!argList || nArgs < 2 || nArgs > 3) {
 		return 3;
 	}
 
-	std::wstring src = argList[0];
+	std::wstring src = argList[1];
 	if (!FileExists(src.c_str())) {
 		return 4;
 	}
 
 	std::wstring dest;
-	if (nArgs == 2) {
-		dest = argList[1];
+	if (nArgs == 3) {
+		dest = argList[2];
 	} else {
 		size_t pointPos = src.find_last_of(L'.');
 		if (pointPos == std::wstring::npos) {
