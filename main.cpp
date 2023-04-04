@@ -42,7 +42,8 @@ int WINAPI wWinMain(
 
 	std::wstring dest;
 	if (nArgs == 3) {
-		dest = argList[2];
+		dest.resize(MAX_PATH);
+		dest.resize(GetFullPathName(argList[2], MAX_PATH, dest.data(), nullptr));
 	} else {
 		size_t pointPos = src.find_last_of(L'.');
 		if (pointPos == std::wstring::npos) {
